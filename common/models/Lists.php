@@ -142,7 +142,7 @@ class Lists extends BaseActiveRecord
             ]);
             $url = "https://api.telegram.org/bot$bot_token/sendPhoto?$http_query";
         } else {
-            $caption = "#savol \n <b>" . strip_tags($this->preview) . '</b>'
+            $caption = "#savol $this->title \n <b>" . strip_tags($this->preview) . '</b>'
                 . "\n Javobni bu yerda o‘qing: \n \u{1f449} http://advokatazimjonov.uz/s/$this->id <b>\n \n";
 
             if ($this->image) {
