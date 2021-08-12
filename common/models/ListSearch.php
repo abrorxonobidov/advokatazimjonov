@@ -48,4 +48,40 @@ class ListSearch extends Lists
 
         return $dataProvider;
     }
+    public function searchTo($params)
+    {
+        $query = Lists::find()->where(['enabled'=>1]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) return $dataProvider;
+
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'category_id' => $this->category_id,
+            'order' => $this->order,
+            'date' => $this->date,
+            'enabled' => $this->enabled
+        ]);
+
+        $query
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'preview', $this->preview])
+            ->andFilterWhere(['like', 'description', $this->description])
+        ;
+
+        return $dataProvider;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Lists;
 use common\models\ListSearch;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -22,6 +23,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+public $layout = 'mainPage';
 
     public function actions()
     {
@@ -38,29 +40,65 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $this->layout = 'mainPage';
         $lang = Yii::$app->language;
-        $news = ListSearch::find()
-            ->select([
-                'id',
-                'date',
-                "title_$lang",
-                "preview_$lang",
-                'preview_image',
-            ])
-            ->where([
-                'category_id' => 3,
-                'enabled' => 1,
-            ])
-            ->orderBy([
-                'date' => SORT_DESC,
-                'order' => SORT_ASC
-            ])
-            ->limit(6)
-            ->all();
+//        $news = ListSearch::find()
+//            ->select([
+//                'id',
+//                'date',
+//                "title_$lang",
+//                "preview_$lang",
+//                'preview_image',
+//            ])
+//            ->where([
+//                'category_id' => 3,
+//                'enabled' => 1,
+//            ])
+//            ->orderBy([
+//                'date' => SORT_DESC,
+//                'order' => SORT_ASC
+//            ])
+//            ->limit(6)
+//            ->all();
 
         return $this->render('index', [
-            'news' => $news
+//            'news' => $news
+        ]);
+    }
+    public function actionNews()
+    {
+        $searchModel = new ListSearch();
+        $queryParams = Yii::$app->request->queryParams;
+        $queryParams['ListSearch']['category_id']=1;
+        $dataProvider = $searchModel->searchTo($queryParams);
+        return $this->render('news',[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionQuestions()
+    {
+        $searchModel = new ListSearch();
+        $queryParams = Yii::$app->request->queryParams;
+        $queryParams['ListSearch']['category_id']=2;
+        $dataProvider = $searchModel->searchTo($queryParams);
+
+        return $this->render('question',[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionView($id)
+    {
+        $page = Lists::findOne($id);
+        return $this->render('news_view',[
+            'model'=>$page
+        ]);
+    }
+    public function actionDetail($id)
+    {
+        $page = Lists::findOne($id);
+        return $this->render('q_view',[
+            'model'=>$page
         ]);
     }
 
