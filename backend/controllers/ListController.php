@@ -81,7 +81,7 @@ class ListController extends BaseController
         if ($result) {
             Yii::$app->session->setFlash('success', Yii::t('yii', 'Successfully shared on') . ' Telegram');
         } else {
-            Yii::$app->session->setFlash('error', Yii::t('yii', 'Error while sharing on') . "Telegram <br> @$response");
+            Yii::$app->session->setFlash('error', Yii::t('yii', 'Error while sharing on Telegram'));
         }
         return $this->redirect(['index', 'ci' => $model->category_id]);
     }

@@ -28,7 +28,6 @@ echo DetailView::widget([
             'label' => $model->getLabel('title'),
             'format' => 'raw'
         ],
-        'title',
         [
             'attribute' => 'preview',
             'label' => $model->getLabel('preview'),
