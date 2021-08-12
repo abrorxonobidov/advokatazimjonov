@@ -2,7 +2,10 @@
 
 namespace common\models;
 
+use common\helpers\DebugHelper;
 use Yii;
+use yii\bootstrap\Html;
+use yii\httpclient\Client;
 
 /**
  * This is the model class for table "lists".
@@ -114,4 +117,49 @@ class Lists extends BaseActiveRecord
     {
         return new ListsQuery(get_called_class());
     }
+
+    public function shareToTelegram()
+    {
+        $bot_token = '1874617763:AAFkFIwmxdZ0HMpRVWBSKGjyMdXcqGBf-QY'; /*@advokatAzimjonovBot*/
+        $chat_id = -1001088812530; /*@idesignedit_test*/
+
+        $title = '<b>' . $this->title . '</b>';
+
+        $caption = $title
+            . "\n <b> " . strip_tags($this->preview) . "</b>"
+            . "\n \n \u{1f449} http://advokatazimjonov.uz/news/$this->id \n \n <b>"
+            . 'Ijtimoiy tarmoqlar' . "</b> \u{1f447} \n \n"
+            . Html::a('Instagram', "https://www.instagram.com") . ' | '
+            . Html::a('Facebook', "https://www.facebook.com/") . ' | '
+            . Html::a('Youtube', "https://www.youtube.com/c/") . ' | '
+            . Html::a('Telegram', "https://t.me/ss");
+        //$http_query = http_build_query([
+        //    'chat_id' => $chat_id,
+        //    'caption' => $caption,
+        //    'photo' => self::imageSourcePath() . $this->image,
+        //    'parse_mode' => 'html'
+        //]);
+        //$url = "https://api.telegram.org/bot$bot_token/sendPhoto?$http_query";
+        $http_query = http_build_query([
+            'chat_id' => $chat_id,
+            'text' => $caption,
+            'parse_mode' => 'html'
+        ]);
+        $url = "https://api.telegram.org/bot$bot_token/sendMessage?$http_query";
+        $client = new Client(['transport' => 'yii\httpclient\CurlTransport']);
+        try {
+            $resp = $client->createRequest()
+                ->setUrl($url)
+                ->setOptions([
+                    'timeout' => 15,
+                    CURLOPT_SSL_VERIFYPEER => false
+                ])
+                ->send();
+        } catch (\Exception $e) {
+            return null;
+        }
+
+        return $resp->content;
+    }
+
 }

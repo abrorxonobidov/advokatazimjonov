@@ -6,12 +6,13 @@ use common\helpers\DebugHelper;
 use Yii;
 use common\models\Lists;
 use common\models\ListSearch;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
 class ListController extends BaseController
 {
 
-    public function actionIndex($ci = null)
+    public function actionIndex($ci = 1)
     {
         $searchModel = new ListSearch();
         $queryParams = Yii::$app->request->queryParams;
@@ -67,6 +68,22 @@ class ListController extends BaseController
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionShare($id)
+    {
+        $model = $this->findModel($id);
+
+        $response = $model->shareToTelegram();
+        $res = Json::decode($response);
+        $result = @$res['ok'];
+
+        if ($result) {
+            Yii::$app->session->setFlash('success', Yii::t('yii', 'Successfully shared on') . ' Telegram');
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('yii', 'Error while sharing on') . "Telegram <br> @$response");
+        }
+        return $this->redirect(['index', 'ci' => $model->category_id]);
     }
 
     public function actionDelete($id, $ci = null)
