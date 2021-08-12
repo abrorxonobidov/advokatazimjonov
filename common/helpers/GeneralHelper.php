@@ -45,4 +45,9 @@ class GeneralHelper
 
         ]);
     }
+
+    public static function iconFa($name)
+    {
+        return Html::tag('i', '', ['class' => "fa fa-$name"]);
+    }
 }

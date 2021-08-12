@@ -4,26 +4,15 @@ namespace frontend\controllers;
 
 use common\models\Lists;
 use common\models\ListSearch;
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-public $layout = 'mainPage';
+    public $layout = 'mainPage';
 
     public function actions()
     {
@@ -40,7 +29,7 @@ public $layout = 'mainPage';
 
     public function actionIndex()
     {
-        $lang = Yii::$app->language;
+//        $lang = Yii::$app->language;
 //        $news = ListSearch::find()
 //            ->select([
 //                'id',
@@ -64,41 +53,45 @@ public $layout = 'mainPage';
 //            'news' => $news
         ]);
     }
+
     public function actionNews()
     {
         $searchModel = new ListSearch();
         $queryParams = Yii::$app->request->queryParams;
-        $queryParams['ListSearch']['category_id']=1;
+        $queryParams['ListSearch']['category_id'] = 1;
         $dataProvider = $searchModel->searchTo($queryParams);
-        return $this->render('news',[
+        return $this->render('news', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
     public function actionQuestions()
     {
         $searchModel = new ListSearch();
         $queryParams = Yii::$app->request->queryParams;
-        $queryParams['ListSearch']['category_id']=2;
+        $queryParams['ListSearch']['category_id'] = 2;
         $dataProvider = $searchModel->searchTo($queryParams);
 
-        return $this->render('question',[
+        return $this->render('question', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
     public function actionView($id)
     {
         $page = Lists::findOne($id);
-        return $this->render('news_view',[
-            'model'=>$page
+        return $this->render('news_view', [
+            'model' => $page
         ]);
     }
+
     public function actionDetail($id)
     {
         $page = Lists::findOne($id);
-        return $this->render('q_view',[
-            'model'=>$page
+        return $this->render('q_view', [
+            'model' => $page
         ]);
     }
 

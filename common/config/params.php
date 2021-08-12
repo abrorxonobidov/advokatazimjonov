@@ -19,4 +19,9 @@ return [
         'en' => 'English',
     ],
     'allowedImageExtension' => "/{*.jpg,*.JPG,*.jpeg,*.gif,*.png}",
+    'telegram' => 'https://t.me/advokatazimjonov',
+    'facebook' => 'https://www.facebook.com/advokatazimjonov',
+    'twitter' => 'https://www.twitter.com/advokatazimjonov',
+    'youtube' => 'https://www.youtube.com/advokatazimjonov',
+    'instagram' => 'https://www.instagram.com/advokatazimjonov',
 ];

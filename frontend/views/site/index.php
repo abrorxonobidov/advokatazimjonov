@@ -14,12 +14,14 @@ $this->title = Yii::t('main', 'Advokat');
     <div class="home-text-wrapper relative container">
         <div class="home-message">
             <p>Learning Management System</p>
-            <small>Edulogy is the ideal choice for your organization, your business and your online education system. Create your online course now with unlimited page templates, color options, and menu features.</small>
+            <small>Edulogy is the ideal choice for your organization, your business and your online education system.
+                Create your online course now with unlimited page templates, color options, and menu features.</small>
             <div class="btn-wrapper">
                 <div class="text-center">
-                    <a href="#" class="btn btn-primary wow slideInLeft">Savol yuborish</a>
+                    <a href="https://t.me/advokatAzimjonovBot" class="btn btn-primary wow slideInLeft" target="_blank">Savol
+                        yuborish</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="#" class="btn btn-default wow slideInRight">Savol-javoblar</a>
+                    <a href="<?= Url::to(['site/questions']) ?>" class="btn btn-default wow slideInRight">Savol-javoblar</a>
                 </div>
             </div><!-- end row -->
         </div>
@@ -29,14 +31,15 @@ $this->title = Yii::t('main', 'Advokat');
     <div class="container">
         <div class="section-title text-center">
             <h3>Recent Courses</h3>
-            <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
+            <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien
+                iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
         </div><!-- end title -->
 
         <div id="owl-01" class="owl-carousel owl-theme owl-theme-01">
             <div class="caro-item">
                 <div class="course-box">
                     <div class="image-wrap entry">
-                        <img src="upload/course_01.jpg" alt="" class="img-responsive">
+                        <img src="/uploads/course_01.jpg" alt="" class="img-responsive">
 
                     </div><!-- end image-wrap -->
                     <div class="course-details">
@@ -51,7 +54,7 @@ $this->title = Yii::t('main', 'Advokat');
             <div class="caro-item">
                 <div class="course-box">
                     <div class="image-wrap entry">
-                        <img src="upload/course_02.jpg" alt="" class="img-responsive">
+                        <img src="/uploads/course_02.jpg" alt="" class="img-responsive">
 
                     </div><!-- end image-wrap -->
                     <div class="course-details">
@@ -66,7 +69,7 @@ $this->title = Yii::t('main', 'Advokat');
             <div class="caro-item">
                 <div class="course-box">
                     <div class="image-wrap entry">
-                        <img src="upload/course_03.jpg" alt="" class="img-responsive">
+                        <img src="/uploads/course_03.jpg" alt="" class="img-responsive">
 
                     </div><!-- end image-wrap -->
                     <div class="course-details">
@@ -81,7 +84,7 @@ $this->title = Yii::t('main', 'Advokat');
             <div class="caro-item">
                 <div class="course-box">
                     <div class="image-wrap entry">
-                        <img src="upload/course_04.jpg" alt="" class="img-responsive">
+                        <img src="/uploads/course_04.jpg" alt="" class="img-responsive">
 
                     </div><!-- end image-wrap -->
                     <div class="course-details">
@@ -96,7 +99,7 @@ $this->title = Yii::t('main', 'Advokat');
             <div class="caro-item">
                 <div class="course-box">
                     <div class="image-wrap entry">
-                        <img src="upload/course_01.jpg" alt="" class="img-responsive">
+                        <img src="/uploads/course_01.jpg" alt="" class="img-responsive">
 
                     </div><!-- end image-wrap -->
                     <div class="course-details">
@@ -112,7 +115,7 @@ $this->title = Yii::t('main', 'Advokat');
         <hr class="invis">
 
         <div class="section-button text-center">
-            <a href="#" class="btn btn-primary">View All Courses</a>
+            <a href="<?= Url::to(['site/questions']) ?>" class="btn btn-primary">View All Courses</a>
         </div>
     </div><!-- end container -->
 </section>
@@ -120,22 +123,23 @@ $this->title = Yii::t('main', 'Advokat');
     <div class="container">
         <div class="section-title text-center">
             <h3>Recent News</h3>
-            <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
+            <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien
+                iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
         </div><!-- end title -->
 
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="blog-box">
                     <div class="image-wrap entry">
-                        <img src="upload/blog_01.jpeg" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <a href="blog-single.html" title=""><i class="flaticon-add"></i></a>
-                        </div>
+                        <a href="blog-single.html" title="">
+                            <img src="/uploads/blog_01.jpeg" alt="" class="img-responsive">
+                        </a>
                     </div><!-- end image-wrap -->
 
                     <div class="blog-desc">
                         <h4><a href="blog-single.html">How to learn perfect code with Javascript</a></h4>
-                        <p>Praesent at suscipit ligula. Suspendisse pre neque, quis suscipit enim. sed maximus, mia auctor.</p>
+                        <p>Praesent at suscipit ligula. Suspendisse pre neque, quis suscipit enim. sed maximus, mia
+                            auctor.</p>
                     </div><!-- end blog-desc -->
 
                     <div class="post-meta">
@@ -151,15 +155,15 @@ $this->title = Yii::t('main', 'Advokat');
             <div class="col-lg-4 col-md-12">
                 <div class="blog-box">
                     <div class="image-wrap entry">
-                        <img src="upload/blog_02.jpeg" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <a href="blog-single.html" title=""><i class="flaticon-add"></i></a>
-                        </div>
+                        <a href="blog-single.html" title="">
+                            <img src="/uploads/blog_02.jpeg" alt="" class="img-responsive">
+                        </a>
                     </div><!-- end image-wrap -->
 
                     <div class="blog-desc">
                         <h4><a href="blog-single.html">The most suitable web design & development tutorials</a></h4>
-                        <p>Sed suscipit neque in erat posuere tristique aliquam porta vestibulum. Cras placerat tincidunt. </p>
+                        <p>Sed suscipit neque in erat posuere tristique aliquam porta vestibulum. Cras placerat
+                            tincidunt. </p>
                     </div><!-- end blog-desc -->
 
                     <div class="post-meta">
@@ -175,15 +179,15 @@ $this->title = Yii::t('main', 'Advokat');
             <div class="col-lg-4 col-md-12">
                 <div class="blog-box">
                     <div class="image-wrap entry">
-                        <img src="upload/blog_03.jpeg" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <a href="blog-single.html" title=""><i class="flaticon-add"></i></a>
-                        </div>
+                        <a href="blog-single.html" title="">
+                            <img src="/uploads/blog_03.jpeg" alt="" class="img-responsive">
+                        </a>
                     </div><!-- end image-wrap -->
 
                     <div class="blog-desc">
                         <h4><a href="blog-single.html">Design for all mobile devices! This is name "responsive"</a></h4>
-                        <p>Suspendisse scelerisque ex ac mattis molestie vel enim ut massa placerat faucibus sed ut dui vivamus. </p>
+                        <p>Suspendisse scelerisque ex ac mattis molestie vel enim ut massa placerat faucibus sed ut dui
+                            vivamus. </p>
                     </div><!-- end blog-desc -->
 
                     <div class="post-meta">
@@ -199,7 +203,7 @@ $this->title = Yii::t('main', 'Advokat');
         <br>
         <br>
         <div class="section-button text-center">
-            <a href="#" class="btn btn-primary">All news</a>
+            <a href="<?= Url::to(['site/news'])?>" class="btn btn-primary">All news</a>
         </div>
     </div><!-- end container -->
 </section>
