@@ -9,7 +9,7 @@ use common\models\Lists;
  * @var $dataProvider yii\data\ActiveDataProvider
  */
 
-$this->title = Yii::$app->request->get('ci') ? $searchModel->category->titleLang : Yii::t('main', 'Рўйхат');
+$this->title = Yii::$app->request->get('ci') ? $searchModel->categoryTitle : Yii::t('main', 'Рўйхат');
 $this->params['breadcrumbs'][] = $this->title;
 
 echo common\helpers\GeneralHelper::titleAndCreateBtn($this->title);
@@ -21,11 +21,20 @@ echo yii\grid\GridView::widget([
         'id',
         [
             'attribute' => 'category_id',
-            'value' => 'category.titleLang',
-            'filter' => common\models\ListCategory::getList(),
+            'value' => 'categoryTitle',
+            'filter' => common\models\Lists::categoryList(),
             'visible' => !Yii::$app->request->get('ci')
         ],
-        'title_uz',
+        [
+            'attribute' => 'title',
+            'label' => $searchModel->getLabel('title'),
+            'format' => 'raw'
+        ],
+        [
+            'attribute' => 'preview',
+            'label' => $searchModel->getLabel('preview'),
+            'format' => 'raw'
+        ],
         [
             'attribute' => 'date',
             'format' => ['date', 'php:Y-m-d'],
@@ -40,13 +49,12 @@ echo yii\grid\GridView::widget([
                 ]
             ])
         ],
-        'preview_uz:raw',
         [
-            'attribute' => 'preview_image',
+            'attribute' => 'image',
             'value' => function (Lists $model) {
-                return $model->preview_image ?
-                    Html::img($model::imageSourcePath() . $model->preview_image, ['class' => 'img-responsive img-thumbnail']) .
-                    Html::tag('p', $model->preview_image, ['style' => 'font-size:10px;'])
+                return $model->image ?
+                    Html::img($model::imageSourcePath() . $model->image, ['class' => 'img-responsive img-thumbnail']) .
+                    Html::tag('p', $model->image, ['style' => 'font-size:10px;'])
                     : '';
             },
             'format' => 'raw',

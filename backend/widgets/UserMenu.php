@@ -28,7 +28,7 @@ class UserMenu extends Widget
             ['label' => '&nbsp;', 'options' => ['class' => 'header'], 'encode' => false],
             [
                 'label' => Yii::t('main', 'Сайтга ўтиш'),
-                'url' => 'http://'.Yii::$app->params['domainName'],
+                'url' => 'http://' . Yii::$app->params['domainName'],
                 'icon' => 'globe'
             ]
         ];
@@ -36,14 +36,8 @@ class UserMenu extends Widget
         if ($this->user->isGuest) {
             $items[] = ['label' => Yii::t('main', 'Вход'), 'url' => ['/site/login']];
         } else {
-            $items[] = ['label' => 'Маҳсулотлар', 'icon' => 'gift', 'url' => ['product/index']];
-            $items[] = ['label' => 'Менюлар', 'icon' => 'navicon', 'url' => ['menus-links/index']];
-            $items[] = ['label' => 'Буюртмалар', 'icon' => 'cart-arrow-down', 'url' => ['order/index']];
-            $items[] = ['label' => 'Янгиликлар', 'icon' => 'newspaper-o', 'url' => ['list/index', 'ci' => 3]];
-            $items[] = ['label' => 'Саҳифалар', 'icon' => 'address-book-o', 'url' => ['list/index', 'ci' => 1]];
-            $items[] = ['label' => 'Хизматлар', 'icon' => 'truck', 'url' => ['list/index', 'ci' => 2]];
-            $items[] = ['label' => 'Фикрлар', 'icon' => 'comments-o', 'url' => ['/reviews']];
-            $items[] = ['label' => 'Cўзлар таржималари', 'icon' => 'language', 'url' => ['/i18n_interface/source-message/index']];
+            $items[] = ['label' => 'Янгиликлар', 'icon' => 'newspaper-o', 'url' => ['/list/index', 'ci' => 1]];
+            $items[] = ['label' => 'Савол-жавоблар', 'icon' => 'comments-o', 'url' => ['/list/index', 'ci' => 2]];
         }
         return $this->render('userMenu',
             [

@@ -9,9 +9,9 @@ use yii\widgets\DetailView;
  * @var $model common\models\Lists
  */
 
-$this->title = $model->titleLang;
+$this->title = $model->title;
 $this->params['breadcrumbs'][] = [
-    'label' => Yii::$app->request->get('ci') ? $model->category->titleLang : Yii::t('main', 'Рўйхат'),
+    'label' => Yii::$app->request->get('ci') ? $model->categoryTitle : Yii::t('main', 'Рўйхат'),
     'url' => ['index', 'ci' => Yii::$app->request->get('ci')]
 ];
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,37 +22,32 @@ echo DetailView::widget([
     'model' => $model,
     'attributes' => [
         'id',
-        'category.titleLang',
-        'date',
-        'link',
+        'categoryTitle',
         [
-            'attribute' => 'preview_image',
-            'value' => Html::img($model::imageSourcePath() . $model->preview_image, ['class' => 'col-md-4'])
-                . ' ' . Html::tag('p', $model->preview_image),
+            'attribute' => 'title',
+            'label' => $model->getLabel('title'),
+            'format' => 'raw'
+        ],
+        'title',
+        [
+            'attribute' => 'preview',
+            'label' => $model->getLabel('preview'),
             'format' => 'raw'
         ],
         [
-            'label' => Yii::t('main', 'Галерея'),
-            'format' => 'html',
-            'value' => function (common\models\Lists $model) {
-                if (!$model->gallery) {
-                    return '';
-                }
-                $images = glob($model::uploadImagePath() . $model->gallery . Yii::$app->params['allowedImageExtension'], GLOB_BRACE);
-                $gallery = [];
-                foreach ($images as $image) {
-                    $filePath = explode('/', $image);
-                    $fileName = end($filePath);
-                    $gallery[] = Html::img($model::imageSourcePath() . $model->gallery . '/' . $fileName, ['style' => 'height:150px;']);
-                }
-                return implode(' ', $gallery) . Html::tag('br') . $model->gallery;
-            }
+            'attribute' => 'description',
+            'label' => $model->getLabel('description'),
+            'format' => 'raw'
+        ],
+        'description:raw',
+        'date:date',
+        [
+            'attribute' => 'image',
+            'value' => Html::img($model::imageSourcePath() . $model->image, ['class' => 'col-md-4'])
+                . ' ' . Html::tag('p', $model->image),
+            'format' => 'raw'
         ],
         'order',
-        //'region_id',
-        //'inner_image',
-        //'video',
-        //'link',
         'enable',
         'created_at',
         'updated_at',
@@ -60,21 +55,3 @@ echo DetailView::widget([
         'modifier.full_name',
     ],
 ]);
-
-
-$items = [];
-foreach (Yii::$app->params['languages'] as $lang_code => $language) {
-    $items[] = [
-        'label' => $language,
-        'content' => DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                "title_$lang_code",
-                "preview_$lang_code:raw",
-                "description_$lang_code:raw",
-            ]
-        ])
-    ];
-}
-
-echo Tabs::widget(['items' => $items]);

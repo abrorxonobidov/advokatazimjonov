@@ -6,10 +6,9 @@
  * Time: 16:33
  */
 
-use yii\bootstrap\Nav;
-
-?>
-<?
+/**
+ * @var $items array
+ */
 echo dmstr\widgets\Menu::widget(
     [
         'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],

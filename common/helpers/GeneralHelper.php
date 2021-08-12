@@ -31,7 +31,7 @@ class GeneralHelper
     public static function actionButtons($model)
     {
         return GeneralHelper::oneRow([
-            Html::tag('h2', $model->titleLang),
+            Html::tag('h2', $model->title),
             Html::a(Html::icon('trash') . ' ' . Yii::t('yii', 'Delete'), ['delete', 'id' => $model->id, 'ci' => Yii::$app->request->get('ci')], [
                 'class' => 'view-button btn btn-danger pull-right',
                 'data' => [

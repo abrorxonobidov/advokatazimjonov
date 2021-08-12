@@ -2,8 +2,7 @@
 
 namespace backend\controllers;
 
-use common\models\BaseActiveRecord;
-use common\models\Product;
+use common\helpers\DebugHelper;
 use Yii;
 use common\models\Lists;
 use common\models\ListSearch;
@@ -36,11 +35,14 @@ class ListController extends BaseController
     {
         $model = new Lists();
         $model->category_id = $ci;
+        if ($model->category_id == 1)
+            $model->setScenario('news');
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                $model->uploadImage('previewImageHelper', 'preview_image', 'list');
-                $model->uploadGallery('helpGallery', 'gallery', 'list');
+                $model->uploadImage('previewImageHelper', 'image', 'list');
                 return $this->redirect(['view', 'id' => $model->id, 'ci' => $model->category_id]);
+            } else {
+                DebugHelper::printSingleObject($model->errors, 1);
             }
         }
 
@@ -52,11 +54,12 @@ class ListController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($model->category_id == 1)
+            $model->setScenario('news');
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                $model->uploadImage('previewImageHelper', 'preview_image', 'list');
-                $model->uploadGallery('helpGallery', 'gallery', 'list');
+                $model->uploadImage('previewImageHelper', 'image', 'list');
                 return $this->redirect(['view', 'id' => $model->id, 'ci' => $model->category_id]);
             }
         }

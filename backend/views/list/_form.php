@@ -13,13 +13,7 @@ use kartik\file\FileInput;
 $form = ActiveForm::begin();
 
 echo common\helpers\GeneralHelper::oneRow([
-    $form->field($model, 'category_id')
-        ->dropDownList(common\models\ListCategory::getList(), [
-            'prompt' => $model->selectText(),
-            'disabled' => Yii::$app->request->get('ci'),
-            'class' => Yii::$app->request->get('ci') ? 'hidden' : 'form-control'
-        ])
-        ->label(Yii::$app->request->get('ci') ? false : $model->getAttributeLabel('category_id')),
+    $form->field($model, 'category_id')->hiddenInput()->label(false),
     $form->field($model, 'date')->widget(kartik\date\DatePicker::class, [
         'type' => 3,
         'attribute' => 'date',
@@ -35,13 +29,9 @@ echo common\helpers\GeneralHelper::oneRow([
 ]);
 
 
-echo Yii::$app->request->get('ci') == 1 ? common\helpers\GeneralHelper::oneRow([
-    $form->field($model, 'link')->textInput(['maxlength' => true])->label('Page code'),
-    $form->field($model, 'video')->textInput(['maxlength' => true]),
-    ''
-]) : '';
+echo $form->field($model, 'title')->textInput()->label($model->getLabel('title'));
 
-$previewConfig = $model->inputImageConfig('preview_image', 'list/file-remove');
+$previewConfig = $model->inputImageConfig('image', 'list/file-remove');
 
 echo $form->field($model, 'previewImageHelper')
     ->widget(FileInput::class, [
@@ -55,7 +45,7 @@ echo $form->field($model, 'previewImageHelper')
             'showUpload' => false,
             'showRemove' => false,
             'browseClass' => 'btn btn-success',
-            'browseLabel' => Html::icon('folder-open') . ' ' . $model->selectText(),
+            'browseLabel' => Html::icon('folder-open') . ' Tanglang',
             'browseIcon' => '',
             'fileActionSettings' => [
                 'removeIcon' => Html::icon('trash'),
@@ -64,43 +54,13 @@ echo $form->field($model, 'previewImageHelper')
         ]
     ]);
 
-$galleyConfig = $model->inputGalleryConfig('list/gallery-remove');
 
-echo $form->field($model, 'helpGallery[]')
-    ->widget(FileInput::class, [
-        'options' => [
-            'accept' => 'image/*',
-            'multiple' => true
-        ],
-        'pluginOptions' => [
-            'allowedFileExtensions' => ['jpg', 'gif', 'png', 'jpeg', 'mp4'],
-            'initialPreview' => $galleyConfig['path'],
-            'initialPreviewAsData' => true,
-            'initialPreviewConfig' => $galleyConfig['config'],
-            'showUpload' => false,
-            'showRemove' => false,
-            'browseClass' => 'btn btn-success',
-            'browseLabel' => Html::icon('folder-open') . '&nbsp;Tanlang...',
-            'browseIcon' => '',
-            'overwriteInitial' => false,
-            'fileActionSettings' => [
-                'removeIcon' => Html::icon('trash'),
-                'showZoom' => false,
-            ]
-        ]
-    ]);
+echo $form->field($model, "preview")
+    ->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('preview'))->label($model->getLabel('preview'));
 
-$items = [];
-foreach (Yii::$app->params['languages'] as $lang_code => $language)
-    $items[] = [
-        'label' => $language,
-        'content' => '<br>' .
-            $form->field($model, "title_$lang_code")->textarea(['rows' => 2]) .
-            $form->field($model, "preview_$lang_code")->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('p_' . $lang_code)) .
-            $form->field($model, "description_$lang_code")->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('d_' . $lang_code))
-    ];
+echo $form->field($model, "description")
+    ->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('description'))->label($model->getLabel('description'));
 
-echo yii\bootstrap\Tabs::widget(['items' => $items]);
 
 echo Html::tag('div', Html::submitButton(Yii::t('main', 'Сақлаш'), ['class' => 'btn btn-success']), ['class' => 'form-group']);
 

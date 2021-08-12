@@ -60,29 +60,4 @@ class BaseController extends Controller {
         }
         return $return;
     }
-
-    public function actionGalleryRemove()
-    {
-        $return = false;
-        $className = Yii::$app->request->post('className');
-        $path = BaseActiveRecord::uploadImagePath()
-            . Yii::$app->request->post('key')
-            . '/';
-        $file = $path . Yii::$app->request->post('imageName');
-        if (isset($file) && file_exists($file)) {
-            unlink($file);
-            $return = true;
-        }
-
-        $images = glob($path . Yii::$app->params['allowedImageExtension'], GLOB_BRACE);
-
-        if (count($images) == 0) {
-            BaseActiveRecord::deleteDir($path);
-            $model = $className::findOne(Yii::$app->request->post('id'));
-            $model->gallery = '';
-            $model->save();
-        }
-
-        return $return;
-    }
 };

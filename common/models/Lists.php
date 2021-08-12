@@ -20,9 +20,13 @@ use Yii;
  * @property string $title [varchar(255)]
  * @property int $order [int(11)]
  * @property bool $enabled [tinyint(1)]
+ * @property string $categoryTitle
  */
 class Lists extends BaseActiveRecord
 {
+
+    const CATEGORY_NEWS = 1;
+    const CATEGORY_QUESTION = 2;
     /**
      * {@inheritdoc}
      */
@@ -37,7 +41,8 @@ class Lists extends BaseActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'title'], 'required'],
+            [['category_id'], 'required'],
+            [['title'], 'required', 'on' => 'news'],
             [['category_id', 'order', 'enabled', 'creator_id', 'modifier_id'], 'integer'],
             [['preview', 'description'], 'string'],
             [['date', 'created_at', 'updated_at'], 'safe'],
@@ -53,13 +58,16 @@ class Lists extends BaseActiveRecord
         return [
             'id' => Yii::t('main', 'ID'),
             'category_id' => Yii::t('main', 'Kategoriya'),
+            'categoryTitle' => Yii::t('main', 'Kategoriya'),
             'title' => Yii::t('main', 'Sarlavha'),
             'preview' => Yii::t('main', 'Savol'),
             'description' => Yii::t('main', 'Javob'),
             'image' => Yii::t('main', 'Rasm'),
+            'previewImageHelper' => Yii::t('main', 'Rasm'),
             'order' => Yii::t('main', 'Tartib'),
             'date' => Yii::t('main', 'Sana'),
             'enabled' => Yii::t('main', 'Aktiv'),
+            'enable' => Yii::t('main', 'Aktiv'),
             'created_at' => Yii::t('main', 'Yaratilgan sana'),
             'updated_at' => Yii::t('main', 'Tahrirlangan sana'),
             'creator_id' => Yii::t('main', 'Yaratuvchi'),
@@ -67,6 +75,39 @@ class Lists extends BaseActiveRecord
         ];
     }
 
+    public static function labelList()
+    {
+        return [
+            'title' => [
+                self::CATEGORY_NEWS => 'Sarlavha',
+                self::CATEGORY_QUESTION => 'Hash Tag (#)',
+            ],
+            'preview' => [
+                self::CATEGORY_NEWS => 'Anons',
+                self::CATEGORY_QUESTION => 'Savol',
+            ],
+            'description' => [
+                self::CATEGORY_NEWS => 'Batafsil',
+                self::CATEGORY_QUESTION => 'Javob',
+            ],
+        ];
+    }
+
+    public function getLabel($attribute) {
+        return self::labelList()[$attribute][$this->category_id];
+    }
+
+    public static function categoryList() {
+        return [
+            1 => 'Янгиликлар',
+            2 => 'Савол-жавоблар'
+        ];
+    }
+
+    public function getCategoryTitle()
+    {
+        return @self::categoryList()[$this->category_id];
+    }
 
 
     public static function find()
