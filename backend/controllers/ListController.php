@@ -83,7 +83,7 @@ class ListController extends BaseController
         } else {
             Yii::$app->session->setFlash('error', Yii::t('yii', 'Error while sharing on Telegram'));
         }
-        return $this->redirect(['index', 'ci' => $model->category_id]);
+        return $this->redirect(['view', 'id' => $id, 'ci' => $model->category_id]);
     }
 
     public function actionDelete($id, $ci = null)

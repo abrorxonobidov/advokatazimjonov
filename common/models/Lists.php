@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use common\helpers\DebugHelper;
 use Yii;
 use yii\bootstrap\Html;
 use yii\httpclient\Client;
@@ -30,6 +29,7 @@ class Lists extends BaseActiveRecord
 
     const CATEGORY_NEWS = 1;
     const CATEGORY_QUESTION = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -96,11 +96,13 @@ class Lists extends BaseActiveRecord
         ];
     }
 
-    public function getLabel($attribute) {
+    public function getLabel($attribute)
+    {
         return self::labelList()[$attribute][$this->category_id];
     }
 
-    public static function categoryList() {
+    public static function categoryList()
+    {
         return [
             1 => 'Янгиликлар',
             2 => 'Савол-жавоблар'
@@ -124,14 +126,14 @@ class Lists extends BaseActiveRecord
         $chat_id = Yii::$app->params['tg_chat_id'];
 
         $links = 'Ijtimoiy tarmoqlar' . "</b> \u{1f447} \n \n"
-            . Html::a('Instagram', "https://www.instagram.com") . ' | '
-            . Html::a('Facebook', "https://www.facebook.com/") . ' | '
-            . Html::a('Youtube', "https://www.youtube.com/c/") . ' | '
-            . Html::a('Telegram', "https://t.me/ss") . " \n \n ";
+            . Html::a('Instagram', Yii::$app->params['instagram']) . ' | '
+            . Html::a('Facebook', Yii::$app->params['facebook']) . ' | '
+            . Html::a('Youtube', Yii::$app->params['youtube']) . ' | '
+            . Html::a('Telegram', Yii::$app->params['telegram']) . " \n \n ";
 
         if ($this->category_id == self::CATEGORY_NEWS) {
             $caption = '<b>' . $this->title . '</b>'
-                . "\n \n \u{1f449} http://advokatazimjonov.uz/news/$this->id <b>\n \n ";
+                . "\n \n \u{1f449} http://advokatazimjonov.uz/n/$this->id <b>\n \n ";
             $http_query = http_build_query([
                 'chat_id' => $chat_id,
                 'caption' => $caption . $links,
@@ -140,15 +142,27 @@ class Lists extends BaseActiveRecord
             ]);
             $url = "https://api.telegram.org/bot$bot_token/sendPhoto?$http_query";
         } else {
-            $caption = '#savol \n <b>' . strip_tags($this->preview) . '</b>'
-                . "\n \n \u{1f449} http://advokatazimjonov.uz/question/$this->id <b>\n \n";
+            $caption = "#savol \n <b>" . strip_tags($this->preview) . '</b>'
+                . "\n Javobni bu yerda o‘qing: \n \u{1f449} http://advokatazimjonov.uz/s/$this->id <b>\n \n";
 
-            $http_query = http_build_query([
-                'chat_id' => $chat_id,
-                'text' => "$caption $links $this->title",
-                'parse_mode' => 'html'
-            ]);
-            $url = "https://api.telegram.org/bot$bot_token/sendMessage?$http_query";
+            if ($this->image) {
+                $http_query = http_build_query([
+                    'chat_id' => $chat_id,
+                    'caption' => $caption . $links,
+                    //'photo' => "http://idesignedit.uz/uploads/678ca3b0-9faa-08ec-3df4-be4ac3caa926.jpg",
+                    'photo' => self::imageSourcePath() . $this->image,
+                    'parse_mode' => 'html'
+                ]);
+                $url = "https://api.telegram.org/bot$bot_token/sendPhoto?$http_query";
+            } else {
+                $http_query = http_build_query([
+                    'chat_id' => $chat_id,
+                    'text' => "$caption $links $this->title",
+                    'parse_mode' => 'html'
+                ]);
+                $url = "https://api.telegram.org/bot$bot_token/sendMessage?$http_query";
+            }
+
         }
 
         $client = new Client(['transport' => 'yii\httpclient\CurlTransport']);
