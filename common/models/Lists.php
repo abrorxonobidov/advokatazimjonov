@@ -132,7 +132,7 @@ class Lists extends BaseActiveRecord
             . Html::a('Telegram', Yii::$app->params['telegram']) . " \n \n ";
 
         if ($this->category_id == self::CATEGORY_NEWS) {
-            $caption = "#yangilik <b> $this->title </b>"
+            $caption = "#yangilik \n<b> $this->title </b>"
                 . "\n \n \u{1f449} http://advokatazimjonov.uz/n/$this->id <b>\n \n ";
             $http_query = http_build_query([
                 'chat_id' => $chat_id,
