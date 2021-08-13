@@ -61,8 +61,8 @@ return [
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [],
                 ],
-
             ],
+            'linkAssets' => false
         ],
     ],
     'params' => $params,
