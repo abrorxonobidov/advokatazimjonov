@@ -29,28 +29,48 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-//        $lang = Yii::$app->language;
-//        $news = ListSearch::find()
-//            ->select([
-//                'id',
-//                'date',
-//                "title_$lang",
-//                "preview_$lang",
-//                'preview_image',
-//            ])
-//            ->where([
-//                'category_id' => 3,
-//                'enabled' => 1,
-//            ])
-//            ->orderBy([
-//                'date' => SORT_DESC,
-//                'order' => SORT_ASC
-//            ])
-//            ->limit(6)
-//            ->all();
+        $news = ListSearch::find()
+            ->select([
+                'id',
+                'date',
+                "title",
+                "preview",
+                'image',
+            ])
+            ->where([
+                'category_id' => 1,
+                'enabled' => 1,
+            ])
+            ->orderBy([
+                'date' => SORT_DESC,
+                'order' => SORT_ASC
+            ])
+            ->limit(3)
+            ->all();
+
+        $faqs = ListSearch::find()
+            ->select([
+                'id',
+                'date',
+                "title",
+                "preview",
+                "description",
+                'image',
+            ])
+            ->where([
+                'category_id' => 2,
+                'enabled' => 1,
+            ])
+            ->orderBy([
+                'date' => SORT_DESC,
+                'order' => SORT_ASC
+            ])
+            ->limit(5)
+            ->all();
 
         return $this->render('index', [
-//            'news' => $news
+            'news' => $news,
+            'faqs' => $faqs
         ]);
     }
 
