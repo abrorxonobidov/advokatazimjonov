@@ -6,7 +6,7 @@
 use yii\helpers\Url;
 
 $anons = $model->preview;
-$body = $model->description;
+$body = mb_substr($model->description,0,200,'utf-8');
 $img = $model->image;
 $date = date('Y-m-d',strtotime($model->date));
 ?>
