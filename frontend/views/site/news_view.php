@@ -14,12 +14,12 @@ $this->title = Yii::t('main', 'Yangiliklar');
         <div class="row">
             <div class="col-md-12">
                 <div class="tagline-message page-title text-center">
-                    <h3>Yangiliklar</h3>
+                    <h3><?= $this->title ?></h3>
                 </div>
-            </div><!-- end col -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-</section><!-- end section -->
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="section gb nopadtop">
     <div class="container">
@@ -29,26 +29,27 @@ $this->title = Yii::t('main', 'Yangiliklar');
                     <div class="content blog-list">
                         <div class="blog-wrapper clearfix">
                             <div class="blog-meta">
-                                <h3><?=$model->title?></h3>
+                                <h3><?= $model->title ?></h3>
                                 <ul class="list-inline">
-                                    <li><?=date('Y-m-d',strtotime($model->date))?></li>
+                                    <li><?= date('Y-m-d', strtotime($model->date)) ?></li>
                                 </ul>
-                            </div><!-- end blog-meta -->
-<?php if ($model->image):?>
-                            <div class="blog-media">
-                                <img src="/uploads/<?=$model->image?>" alt="" class="img-responsive img-rounded">
-                            </div><!-- end media -->
-<?php endif;?>
+                            </div>
+                            <? if ($model->image) { ?>
+                                <div class="blog-media">
+                                    <img src="/uploads/<?= $model->image ?>" alt="" class="img-responsive img-rounded">
+                                </div>
+                            <? } ?>
                             <div class="blog-desc-big">
-                                <p class="lead"><?=$model->preview?></p>
-                                <?=$model->description?>
+                                <div class="lead">
+                                    <?= $model->preview ?>
+                                </div>
+                                <?= $model->description ?>
                                 <hr class="invis">
-
-                            </div><!-- end desc -->
-                        </div><!-- end blog -->
-                    </div><!-- end content -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-        </div><!-- end boxed -->
-    </div><!-- end container -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

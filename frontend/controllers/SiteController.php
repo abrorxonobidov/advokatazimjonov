@@ -26,14 +26,14 @@ class SiteController extends Controller
     {
         $news = ListSearch::find()
             ->select(['id', 'date', 'title', 'preview', 'image'])
-            ->where(['category_id' => 1, 'enabled' => 1])
+            ->where(['category_id' => ListSearch::CATEGORY_NEWS, 'enabled' => 1])
             ->orderBy(['date' => SORT_DESC, 'order' => SORT_ASC])
             ->limit(3)
             ->all();
 
         $faqs = ListSearch::find()
             ->select(['id', 'date', 'title', 'preview', 'image'])
-            ->where(['category_id' => 1, 'enabled' => 1])
+            ->where(['category_id' => ListSearch::CATEGORY_QUESTION, 'enabled' => 1])
             ->orderBy(['order' => SORT_ASC, 'id' => SORT_DESC])
             ->limit(10)
             ->all();

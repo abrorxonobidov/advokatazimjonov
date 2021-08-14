@@ -24,7 +24,7 @@ use yii\helpers\Url;
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode(strip_tags($this->title)) ?></title>
     <?php $this->head() ?>
 </head>
 <body>

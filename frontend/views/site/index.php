@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use common\helpers\GeneralHelper;
 
 /**
  * @var $this yii\web\View
@@ -41,23 +42,23 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
             <?php foreach ($faqs as $faq): ?>
                 <div class="caro-item">
                     <div class="course-box">
-                        <div class="image-wrap entry question-img-div">
-                            <a href="<?= Url::to(['site/detail', 'id' => $faq->id]) ?>" title="">
-                                <img src="/uploads/<?= $faq->image ? $faq->image : 'question_img_' . rand(1, 5) . '.jpg' ?>" alt="" class="img-responsive">
+                        <!--<div class="image-wrap entry question-img-div">
+                            <a href="<?/*= Url::to(['site/detail', 'id' => $faq->id]) */?>" title="">
+                                <img src="/uploads/<?/*= $faq->image ? $faq->image : 'question_img_' . rand(1, 5) . '.jpg' */?>" alt="" class="img-responsive">
                             </a>
-                        </div><!-- end image-wrap -->
+                        </div>-->
                         <div class="course-details">
                             <h4>
                                 <a href="<?= Url::to(['site/detail', 'id' => $faq->id]) ?>" title="">
-                                    <?= mb_substr($faq->preview, 0, 80, 'utf-8') ?>
+                                    <?= GeneralHelper::wordCount($faq->preview) ?>
                                 </a>
                             </h4>
                             <p><?= $faq->title ?></p>
-                        </div><!-- end details -->
-                    </div><!-- end box -->
-                </div><!-- end col -->
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
-        </div><!-- end row -->
+        </div>
 
         <hr class="invis">
 
@@ -69,7 +70,7 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
 <section class="section gb">
     <div class="container">
         <div class="section-title text-center">
-            <h3>So‘ngi yangiliklar</h3>
+            <h3>So‘nggi yangiliklar</h3>
         </div><!-- end title -->
 
         <div class="row">
@@ -82,9 +83,13 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
                             </a>
                         </div><!-- end image-wrap -->
 
-                        <div class="blog-desc">
-                            <h4><a href="<?= Url::to(['site/view', 'id' => $item->id]) ?>"><?= $item->title ?></a></h4>
-                            <p><?= $item->preview ?></p>
+                        <div class="blog-desc text-justify">
+                            <h4>
+                                <a href="<?= Url::to(['site/view', 'id' => $item->id]) ?>">
+                                    <?= $item->title ?>
+                                </a>
+                            </h4>
+                            <p><?= GeneralHelper::wordCount($item->preview) ?></p>
                         </div><!-- end blog-desc -->
 
                         <div class="post-meta">

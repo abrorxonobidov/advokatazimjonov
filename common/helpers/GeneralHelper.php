@@ -50,4 +50,15 @@ class GeneralHelper
     {
         return Html::tag('i', '', ['class' => "fa fa-$name"]);
     }
+
+    public static function wordCount($string, $count = 200, $prefix = ' ...')
+    {
+        $str = strip_tags($string) . ' ';
+        return (intval((mb_strlen($str))) > $count) ? 'nulll'
+            /*mb_substr($str, 0,
+                mb_strpos($str, ' ', $count), 'utf-8') . $prefix*/
+            :
+            $str;
+    }
 }
+//Америкада 37 минг, Ўзбекистонда 200 минг, Доғистонда 1 миллион: олимпиада чемпионлари дунё бўйлаб қандай тақдирланди?
