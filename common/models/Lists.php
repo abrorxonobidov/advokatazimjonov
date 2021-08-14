@@ -45,7 +45,7 @@ class Lists extends BaseActiveRecord
     {
         return [
             [['category_id'], 'required'],
-            [['title'], 'required', 'on' => 'news'],
+            [['title', 'date'], 'required', 'on' => 'news'],
             [['category_id', 'order', 'enabled', 'creator_id', 'modifier_id'], 'integer'],
             [['preview', 'description'], 'string'],
             [['date', 'created_at', 'updated_at'], 'safe'],
@@ -137,7 +137,7 @@ class Lists extends BaseActiveRecord
             $http_query = http_build_query([
                 'chat_id' => $chat_id,
                 'caption' => $caption . $links,
-                'photo' => self::imageSourcePath() . $this->image,
+                'photo' => $this->image ? self::imageSourcePath() . $this->image : self::imageSourcePath() . 'news_default_image.jpg',
                 'parse_mode' => 'html'
             ]);
             $url = "https://api.telegram.org/bot$bot_token/sendPhoto?$http_query";

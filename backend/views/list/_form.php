@@ -11,7 +11,7 @@ use kartik\file\FileInput;
  */
 
 $form = ActiveForm::begin();
-
+$model->isNewRecord ? $model->date = date('Y-m-d') : $model->date;
 echo common\helpers\GeneralHelper::oneRow([
     $form->field($model, 'category_id')->hiddenInput()->label(false),
     $form->field($model, 'date')->widget(kartik\date\DatePicker::class, [
@@ -56,10 +56,12 @@ echo $form->field($model, 'previewImageHelper')
 
 
 echo $form->field($model, "preview")
-    ->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('preview'))->label($model->getLabel('preview'));
+    ->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('preview'))
+    ->label($model->getLabel('preview'));
 
 echo $form->field($model, "description")
-    ->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('description'))->label($model->getLabel('description'));
+    ->widget(dosamigos\ckeditor\CKEditor::class, $model->ckEditorConfig('description'))
+    ->label($model->getLabel('description'));
 
 
 echo Html::tag('div', Html::submitButton(Yii::t('main', 'Сақлаш'), ['class' => 'btn btn-success']), ['class' => 'form-group']);
