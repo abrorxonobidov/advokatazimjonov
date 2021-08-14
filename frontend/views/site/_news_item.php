@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 $title = $model->title;
 $anons = strip_tags($model->preview, '<br><p>');
-$img = $model->image;
+$img = $model->image ? $model->image : 'news_default_image.jpg';
 $date = date('Y-m-d', strtotime($model->date));
 ?>
 <div class="content blog-list">
@@ -20,13 +20,11 @@ $date = date('Y-m-d', strtotime($model->date));
         </div><!-- end blog-meta -->
 
         <div class="row">
-            <?php if ($img): ?>
-                <div class="col-md-3">
-                    <div class="blog-media">
-                        <a href="<?= Url::to(['site/view', 'id' => $model->id]) ?>" title=""><img src="/uploads/<?= $img ?>" alt="" class="img-responsive img-rounded"></a>
-                    </div><!-- end media -->
-                </div>
-            <?php endif; ?>
+            <div class="col-md-3">
+                <div class="blog-media">
+                    <a href="<?= Url::to(['site/view', 'id' => $model->id]) ?>" title=""><img src="/uploads/<?= $img ?>" alt="" class="img-responsive img-rounded"></a>
+                </div><!-- end media -->
+            </div>
             <div class="col-md-9">
                 <div class="blog-desc-big">
                     <div class="lead"><?= $anons ?></div>

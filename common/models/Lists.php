@@ -125,15 +125,14 @@ class Lists extends BaseActiveRecord
         $bot_token = Yii::$app->params['tg_token'];
         $chat_id = Yii::$app->params['tg_chat_id'];
 
-        $links = 'Ijtimoiy tarmoqlar' . "</b> \u{1f447} \n \n"
-            . Html::a('Instagram', Yii::$app->params['instagram']) . ' | '
+        $links = Html::a('Instagram', Yii::$app->params['instagram']) . ' | '
             . Html::a('Facebook', Yii::$app->params['facebook']) . ' | '
             . Html::a('Youtube', Yii::$app->params['youtube']) . ' | '
             . Html::a('Telegram', Yii::$app->params['telegram']) . " \n \n ";
 
         if ($this->category_id == self::CATEGORY_NEWS) {
             $caption = "#yangilik \n<b> $this->title </b>"
-                . "\n \n \u{1f449} http://advokatazimjonov.uz/n/$this->id <b>\n \n ";
+                . "\n \n \u{1f449} http://advokatazimjonov.uz/v/$this->id\n \n ";
             $http_query = http_build_query([
                 'chat_id' => $chat_id,
                 'caption' => $caption . $links,
@@ -143,13 +142,12 @@ class Lists extends BaseActiveRecord
             $url = "https://api.telegram.org/bot$bot_token/sendPhoto?$http_query";
         } else {
             $caption = "#savol $this->title \n <b>" . strip_tags($this->preview) . '</b>'
-                . "\n Javobni bu yerda o‘qing: \n \u{1f449} http://advokatazimjonov.uz/s/$this->id <b>\n \n";
+                . "\n Javobni bu yerda o‘qing: \n \u{1f449} http://advokatazimjonov.uz/d/$this->id\n \n";
 
             if ($this->image) {
                 $http_query = http_build_query([
                     'chat_id' => $chat_id,
-                    'caption' => $caption . $links,
-                    //'photo' => "http://idesignedit.uz/uploads/678ca3b0-9faa-08ec-3df4-be4ac3caa926.jpg",
+                    'caption' => "$caption $links",
                     'photo' => self::imageSourcePath() . $this->image,
                     'parse_mode' => 'html'
                 ]);
@@ -157,7 +155,7 @@ class Lists extends BaseActiveRecord
             } else {
                 $http_query = http_build_query([
                     'chat_id' => $chat_id,
-                    'text' => "$caption $links $this->title",
+                    'text' => "$caption $links",
                     'parse_mode' => 'html'
                 ]);
                 $url = "https://api.telegram.org/bot$bot_token/sendMessage?$http_query";

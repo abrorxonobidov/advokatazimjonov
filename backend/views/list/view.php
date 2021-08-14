@@ -38,7 +38,6 @@ echo DetailView::widget([
             'label' => $model->getLabel('description'),
             'format' => 'raw'
         ],
-        'description:raw',
         'date:date',
         [
             'attribute' => 'image',

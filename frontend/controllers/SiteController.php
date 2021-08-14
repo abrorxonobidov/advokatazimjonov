@@ -27,7 +27,7 @@ class SiteController extends Controller
         $news = ListSearch::find()
             ->select(['id', 'date', 'title', 'preview', 'image'])
             ->where(['category_id' => ListSearch::CATEGORY_NEWS, 'enabled' => 1])
-            ->orderBy(['date' => SORT_DESC, 'order' => SORT_ASC])
+            ->orderBy(['date' => SORT_DESC, 'order' => SORT_ASC, 'id' => SORT_DESC])
             ->limit(3)
             ->all();
 
@@ -49,7 +49,8 @@ class SiteController extends Controller
         $dataProvider = ListSearch::searchTo(ListSearch::CATEGORY_NEWS);
         $dataProvider->sort->defaultOrder = [
             'date' => SORT_DESC,
-            'order' => SORT_ASC
+            'order' => SORT_ASC,
+            'id' => SORT_DESC
         ];
         return $this->render('news', [
             'dataProvider' => $dataProvider

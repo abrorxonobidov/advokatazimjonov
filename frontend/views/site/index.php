@@ -43,8 +43,8 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
                 <div class="caro-item">
                     <div class="course-box">
                         <!--<div class="image-wrap entry question-img-div">
-                            <a href="<?/*= Url::to(['site/detail', 'id' => $faq->id]) */?>" title="">
-                                <img src="/uploads/<?/*= $faq->image ? $faq->image : 'question_img_' . rand(1, 5) . '.jpg' */?>" alt="" class="img-responsive">
+                            <a href="<? /*= Url::to(['site/detail', 'id' => $faq->id]) */ ?>" title="">
+                                <img src="/uploads/<? /*= $faq->image ? $faq->image : 'question_img_' . rand(1, 5) . '.jpg' */ ?>" alt="" class="img-responsive">
                             </a>
                         </div>-->
                         <div class="course-details">
@@ -79,7 +79,7 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
                     <div class="blog-box">
                         <div class="image-wrap entry news-img-div">
                             <a href="<?= Url::to(['site/view', 'id' => $item->id]) ?>" title="">
-                                <img src="/uploads/<?= $item->image ?>" alt="" class="img-responsive">
+                                <img src="/uploads/<?= $item->image ? $item->image : 'news_default_image.jpg' ?>" alt="" class="img-responsive">
                             </a>
                         </div><!-- end image-wrap -->
 
