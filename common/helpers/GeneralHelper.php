@@ -54,9 +54,9 @@ class GeneralHelper
     public static function wordCount($string, $count = 200, $prefix = ' ...')
     {
         $str = strip_tags($string) . ' ';
-        return (intval((mb_strlen($str))) > $count) ? 'nulll'
-            /*mb_substr($str, 0,
-                mb_strpos($str, ' ', $count), 'utf-8') . $prefix*/
+        return (intval((mb_strlen($str))) > $count) ?
+            mb_substr($str, 0,
+                mb_strpos($str, ' ', $count), 'utf-8') . $prefix
             :
             $str;
     }
