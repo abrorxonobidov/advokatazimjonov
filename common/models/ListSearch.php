@@ -43,45 +43,29 @@ class ListSearch extends Lists
         $query
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'preview', $this->preview])
-            ->andFilterWhere(['like', 'description', $this->description])
-        ;
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }
-    public function searchTo($params)
-    {
-        $query = Lists::find()->where(['enabled'=>1]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+    public static function searchTo($category_id)
+    {
+        return new ActiveDataProvider([
+            'query' => Lists::find()
+                ->where([
+                    'enabled' => 1,
+                    'category_id' => $category_id
+                ]),
             'pagination' => [
-                'pageSize' => 5,
+                'pageSize' => 5
             ],
             'sort' => [
                 'defaultOrder' => [
+                    'order' => SORT_ASC,
                     'id' => SORT_DESC
                 ]
             ]
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) return $dataProvider;
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'category_id' => $this->category_id,
-            'order' => $this->order,
-            'date' => $this->date,
-            'enabled' => $this->enabled
-        ]);
-
-        $query
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'preview', $this->preview])
-            ->andFilterWhere(['like', 'description', $this->description])
-        ;
-
-        return $dataProvider;
     }
 }

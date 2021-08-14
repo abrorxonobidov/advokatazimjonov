@@ -1,21 +1,20 @@
 <?php
 
-use yii\helpers\Url;
 use yii\widgets\ListView;
 
 /**
  * @var $this yii\web\View
- * @var $news common\models\Lists[]
+ * @var $dataProvider yii\data\ActiveDataProvider
  */
 
-$this->title = Yii::t('main', 'Savollar');
+$this->title = Yii::t('main', 'Savol-javoblar');
 ?>
 <section class="section db p120">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="tagline-message page-title text-center">
-                    <h3>Savollar</h3>
+                    <h3><?= $this->title ?></h3>
                 </div>
             </div><!-- end col -->
         </div><!-- end row -->
@@ -35,11 +34,7 @@ $this->title = Yii::t('main', 'Savollar');
                             'id' => '',
                         ],
                         'layout' => "{items}\n<div class='row'><div class=\"col-md-12\">{pager}</div></div>", //\n{summary}
-                        'itemView' => function ($model) {
-                            return $this->render('_q_item', [
-                                'model' => $model
-                            ]);
-                        },
+                        'itemView' => '_q_item',
                         'itemOptions' => [
                             'tag' => false,
                         ],
@@ -47,14 +42,13 @@ $this->title = Yii::t('main', 'Savollar');
                             'maxButtonCount' => 10,
                             'options' => [
                                 'class' => 'pagination',
-//                                'id' => 'pager-container'
                             ],
                         ],
                         'emptyTextOptions' => [
                             'tag' => 'div',
                             'class' => 'alert alert-info'
                         ],
-                        'emptyText' =>'Ma’lumotlar to‘ldirilmoqda'
+                        'emptyText' => 'Ma’lumotlar to‘ldirilmoqda'
                     ]); ?>
                 </div><!-- end col -->
             </div><!-- end row -->

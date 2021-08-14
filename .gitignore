@@ -40,6 +40,9 @@ phpunit.phar
 
 # ignore generated files
 /frontend/web/index.php
+/frontend/web/index.html
+/frontend/web/news.html
+/frontend/web/questions.html
 /frontend/web/uploads
 /frontend/web/robots.txt
 /backend/web/index.php

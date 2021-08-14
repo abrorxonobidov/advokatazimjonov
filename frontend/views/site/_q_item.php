@@ -5,28 +5,24 @@
 
 use yii\helpers\Url;
 
-$anons = $model->preview;
-$body = mb_substr($model->description,0,200,'utf-8');
-$img = $model->image;
-$date = date('Y-m-d',strtotime($model->date));
+$body = mb_substr(strip_tags($model->description, '<br><p>'), 0, 200, 'utf-8');
+$date = date('Y-m-d', strtotime($model->date));
 ?>
 <div class="content blog-list">
     <div class="blog-wrapper clearfix">
-        <div class="blog-meta">
-            <h3><a href="<?=Url::to(['site/detail','id'=>$model->id])?>" title=""><?=$anons?></a></h3>
-            <ul class="list-inline">
-                <li><?=$date?></li>
-            </ul>
-        </div><!-- end blog-meta -->
-
         <div class="row">
             <div class="col-md-12">
                 <div class="blog-desc-big">
-                    <?=$body?>
-                    <a href="<?=Url::to(['site/detail','id'=>$model->id])?>" class="btn btn-primary">Batafsil</a>
-                </div><!-- end desc -->
+                    <div class="lead"><?= strip_tags($model->preview, '<br><p>') ?></div>
+                    <p class="small text-right">
+                        <span class="pull-left"><?= $model->title ?></span>
+                        <?= $date ?>
+                    </p>
+                    <div><?= $body ?></div>
+                    <a href="<?= Url::to(['site/detail', 'id' => $model->id]) ?>" class="btn btn-primary">Batafsil</a>
+                </div>
             </div>
         </div>
-    </div><!-- end blog -->
+    </div>
 </div>
 

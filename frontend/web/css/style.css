@@ -358,7 +358,7 @@ HEADER
 
 .modal-backdrop.in {
     opacity: 1;
-    background: url(images/pattern.png) repeat center center rgba(0, 0, 0, 1);
+    background: url(../../pattern.png) repeat center center rgba(0, 0, 0, 1);
 }
 
 .modal-header {
@@ -1016,7 +1016,7 @@ SECTIONS
     left: 0;
     bottom: 0;
     z-index: 1;
-    background: url(images/pattern.png) repeat center center rgba(0, 0, 0, 0.7);
+    background: url(../../images/pattern.png) repeat center center rgba(0, 0, 0, 0.7);
 }
 
 .video-section {
@@ -1988,7 +1988,7 @@ FOOTER
     margin-top: -45%;
     padding: 6rem 4rem;
     position: relative;
-    background: url(upload/formbg.jpg) no-repeat top center #161616;
+    background: url(../../uploads/formbg.jpg) no-repeat top center #161616;
 }
 
 .absolute-widget .form-control {

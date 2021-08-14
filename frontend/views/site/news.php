@@ -1,11 +1,10 @@
 <?php
 
-use yii\helpers\Url;
 use yii\widgets\ListView;
 
 /**
  * @var $this yii\web\View
- * @var $news common\models\Lists[]
+ * @var $dataProvider yii\data\ActiveDataProvider
  */
 
 $this->title = Yii::t('main', 'Yangiliklar');
@@ -15,7 +14,7 @@ $this->title = Yii::t('main', 'Yangiliklar');
         <div class="row">
             <div class="col-md-12">
                 <div class="tagline-message page-title text-center">
-                    <h3>Yangiliklar</h3>
+                    <h3><?=$this->title?></h3>
                 </div>
             </div><!-- end col -->
         </div><!-- end row -->
@@ -34,11 +33,7 @@ $this->title = Yii::t('main', 'Yangiliklar');
                             'id' => '',
                         ],
                         'layout' => "{items}\n<div class='row'><div class=\"col-md-12\">{pager}</div></div>", //\n{summary}
-                        'itemView' => function ($model) {
-                            return $this->render('_news_item', [
-                                'model' => $model
-                            ]);
-                        },
+                        'itemView' => '_news_item',
                         'itemOptions' => [
                             'tag' => false,
                         ],
@@ -46,7 +41,6 @@ $this->title = Yii::t('main', 'Yangiliklar');
                             'maxButtonCount' => 10,
                             'options' => [
                                 'class' => 'pagination',
-//                                'id' => 'pager-container'
                             ],
                         ],
                         'emptyTextOptions' => [

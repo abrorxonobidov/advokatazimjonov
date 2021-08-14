@@ -1,0 +1,18 @@
+.question-img-div {
+    height: 272px;
+}
+
+.news-img-div {
+    height: 240px;
+}
+
+.question-img-div img,
+.news-img-div img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.navbar-default .nav>li.active>a{
+    color: black !important;
+}

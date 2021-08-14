@@ -8,7 +8,7 @@
             <div class="pull-right">
                 <div class="footer-links">
                     <ul class="list-inline">
-                        <li>Developer: <a href="http://idesignedit.uz">"I designed it"</a></li>
+                        <li>Sayt yaratuvchisi: <a href="http://idesignedit.uz">"I designed it"</a></li>
                     </ul>
                 </div>
             </div>
