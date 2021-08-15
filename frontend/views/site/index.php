@@ -23,10 +23,12 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
             </small>
             <div class="btn-wrapper">
                 <div class="text-center">
-                    <a href="https://t.me/advokatAzimjonovBot" class="btn btn-primary wow slideInLeft" target="_blank">Savol
-                        yuborish</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="<?= Url::to(['site/questions']) ?>" class="btn btn-default wow slideInRight">Savol-javoblar</a>
+                    <a href="https://t.me/advokatAzimjonovBot" class="btn btn-primary wow slideInLeft action-btn" target="_blank">
+                        SAVOL YUBORISH
+                    </a>
+                    <a href="<?= Url::to(['site/questions']) ?>" class="btn btn-default wow slideInRight action-btn">
+                        SAVOL-JAVOBLAR
+                    </a>
                 </div>
             </div><!-- end row -->
         </div>
@@ -110,3 +112,7 @@ $this->title = Yii::t('main', 'Advokat Azimjonov');
         </div>
     </div><!-- end container -->
 </section>
+
+
+Америкада 37 минг, Ўзбекистонда 200 минг, Доғистонда 1 миллион: олимпиада чемпионлари дунё бўйлаб қандай тақдирланди?
+Америкада 37 минг, Ўзбекистонда 200 минг, Доғистонда 1 миллион: олимпиада чемпионлари дунё бўйлаб қандай тақдирланди?

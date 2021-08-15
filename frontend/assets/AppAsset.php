@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
         'css/carousel.css',
         'css/animate.css',
         'css/style.css?v=3',
-        'css/my.css?v=2',
+        'css/my.css?v=4',
     ];
     public $js = [
         'js/jquery.min.js',

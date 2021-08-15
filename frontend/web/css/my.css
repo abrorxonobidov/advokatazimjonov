@@ -15,4 +15,41 @@
 }
 .navbar-default .nav>li.active>a{
     color: black !important;
+    background-color: #6d6d6d;
+}
+
+.action-btn {
+    min-width: 220px;
+    margin: 5px;
+}
+
+.affix-top #navbar li {
+    background-color: transparent;
+}
+#navbar.collapsing li,
+#navbar.in li {
+    background-color: #000000 !important;
+}
+#navbar li:hover {
+    background-color: #5a5a5a !important;
+}
+.navbar-default .nav>li>a {
+    text-transform: none;
+}
+.course-details {
+    padding: 3rem 2rem;
+    height: 52vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.course-details p {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    flex-direction: row;
+    justify-content: flex-start;
 }
